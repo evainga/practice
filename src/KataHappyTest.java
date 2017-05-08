@@ -28,7 +28,7 @@ public class KataHappyTest {
 		assertThat(happy.happyCheck(8, true), is(false));
 		assertThat(happy.happyCheck(49, true), is(true));
 
-		// t
+		// test
 
 	}
 
