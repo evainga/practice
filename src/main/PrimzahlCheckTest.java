@@ -10,7 +10,7 @@ public class PrimzahlCheckTest {
 
 	private PrimzahlCheck primzahlService = new PrimzahlCheck();
 
-	@DataProvider(name = "istPrimzahl")
+	@DataProvider(name = "primzahlCheck")
 	public Object[][] createData1() {
 		return new Object[][] {
 				{ 1, false },
@@ -36,7 +36,7 @@ public class PrimzahlCheckTest {
 		};
 	}
 
-	@Test(dataProvider = "istPrimzahl")
+	@Test(dataProvider = "primzahlCheck")
 	public void primzahl(int number, boolean primzahl) {
 		assertThat(primzahlService.primzahlCheck(number), is(primzahl));
 
