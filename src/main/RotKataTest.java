@@ -39,8 +39,10 @@ public class RotKataTest {
 	public void rotKataEncrypter() {
 		assertThat(rotKata.rotKataEncrypter("HelloWorld", 13),
 				is("URYYBJBEYQ"));
-		// assertThat(rotKata.rotKataEncrypter("Hello World", 13), is("URYYB
-		// JBEYQ"));
+		assertThat(rotKata.rotKataEncrypter("Hello World", 13), is("URYYB JBEYQ"));
+		assertThat(rotKata.rotKataEncrypter("Hello, World!", 13), is("URYYB, JBEYQ!"));
+		assertThat(rotKata.rotKataEncrypter("übungs ding!&", 1), is("VFCVOHT EJOH!&"));
+
 	}
 
 	// @DataProvider(name = "toASCII")

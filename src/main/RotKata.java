@@ -18,7 +18,7 @@ public class RotKata {
 			shiftNumber = shiftNumber % alphabet.length;
 		}
 
-		for (int i = 0; i <= alphabet.length; i++) {
+		for (int i = 0; i < alphabet.length; i++) {
 			if (oldChar == alphabet[i]) {
 				if (i >= alphabet.length - shiftNumber) {
 					i = shiftNumber - (alphabet.length - i);
