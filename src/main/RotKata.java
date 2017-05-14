@@ -2,7 +2,7 @@ package main;
 
 public class RotKata {
 
-	public String grossschreibung(String word) {
+	public String upperCaseAndFormat(String word) {
 		return word.toUpperCase().replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE");
 	}
 
@@ -30,8 +30,8 @@ public class RotKata {
 		return newChar;
 	}
 
-	public String rotKataEncrypter(String word, int versatz) {
-		char[] keyword = grossschreibung(word).toCharArray();
+	public String encrypter(String word, int versatz) {
+		char[] keyword = upperCaseAndFormat(word).toCharArray();
 		for (int i = 0; i < keyword.length; i++) {
 			keyword[i] = charSwitcher(keyword[i], versatz);
 		}

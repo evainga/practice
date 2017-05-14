@@ -11,12 +11,12 @@ public class RotKataTest {
 	RotKata rotKata = new RotKata();
 
 	@Test
-	public void grossschreibung() {
-		assertThat(rotKata.grossschreibung("abcDßäüöä"), is("ABCDSSAEUEOEAE"));
+	public void upperCaseAndFormat() {
+		assertThat(rotKata.upperCaseAndFormat("abcDßäüöä"), is("ABCDSSAEUEOEAE"));
 	}
 
 	@DataProvider(name = "charSwitcher")
-	public Object[][] createData2() {
+	public Object[][] createData1() {
 		return new Object[][] {
 				{ 'A', 3, 'D' },
 				{ 'D', 3, 'G' },
@@ -25,6 +25,7 @@ public class RotKataTest {
 				{ 'Z', 28, 'B' },
 				{ 'C', 140, 'M' },
 				{ 'H', 13, 'U' },
+				{ 'V', 13, 'I' },
 				{ '.', 13, '.' }
 		};
 	}
@@ -35,18 +36,26 @@ public class RotKataTest {
 				is(newChar));
 	}
 
-	@Test
-	public void rotKataEncrypter() {
-		assertThat(rotKata.rotKataEncrypter("HelloWorld", 13),
-				is("URYYBJBEYQ"));
-		assertThat(rotKata.rotKataEncrypter("Hello World", 13), is("URYYB JBEYQ"));
-		assertThat(rotKata.rotKataEncrypter("Hello, World!", 13), is("URYYB, JBEYQ!"));
-		assertThat(rotKata.rotKataEncrypter("übungs ding!&", 1), is("VFCVOHT EJOH!&"));
+	@DataProvider(name = "encrypter")
+	public Object[][] createData2() {
+		return new Object[][] {
+				{ "HelloWorld", 13, "URYYBJBEYQ" },
+				{ "Hello World", 13, "URYYB JBEYQ" },
+				{ "Hello, World!", 13, "URYYB, JBEYQ!" },
+				{ "übungs ding!&", 27, "VFCVOHT EJOH!&" },
+
+		};
+	}
+
+	@Test(dataProvider = "encrypter")
+	public void encrypter(String oldWord, int shiftNumber, String newWord) {
+		assertThat(rotKata.encrypter(oldWord, shiftNumber),
+				is(newWord));
 
 	}
 
 	// @DataProvider(name = "toASCII")
-	// public Object[][] createData1() {
+	// public Object[][] createData3() {
 	// return new Object[][] {
 	// { 'A', 65 },
 	// { 'B', 66 },
