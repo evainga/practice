@@ -54,22 +54,4 @@ public class RotKataTest {
 
 	}
 
-	// @DataProvider(name = "toASCII")
-	// public Object[][] createData3() {
-	// return new Object[][] {
-	// { 'A', 65 },
-	// { 'B', 66 },
-	// { 'Z', 90 },
-	// { 'Ä', 196 },
-	// { 'Ü', 220 },
-	// { 'Ö', 214 },
-	// { 'ß', 223 }
-	// };
-	// }
-
-	// @Test(dataProvider = "toASCII")
-	// public void toASCII(char character, int ascii) {
-	// assertThat(rotKata.toASCII(character), is(ascii));
-	// }
-
 }

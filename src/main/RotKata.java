@@ -6,10 +6,6 @@ public class RotKata {
 		return word.toUpperCase().replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE");
 	}
 
-	// public int toASCII(char character) {
-	// return character;
-	// }
-
 	public char charSwitcher(char oldChar, int shiftNumber) {
 		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
@@ -30,10 +26,10 @@ public class RotKata {
 		return newChar;
 	}
 
-	public String encrypter(String word, int versatz) {
+	public String encrypter(String word, int shiftNumber) {
 		char[] keyword = upperCaseAndFormat(word).toCharArray();
 		for (int i = 0; i < keyword.length; i++) {
-			keyword[i] = charSwitcher(keyword[i], versatz);
+			keyword[i] = charSwitcher(keyword[i], shiftNumber);
 		}
 		return new String(keyword);
 	}
