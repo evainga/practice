@@ -24,21 +24,23 @@ public class RotKataTest {
 				{ 'Z', 27, 'A' },
 				{ 'Z', 28, 'B' },
 				{ 'C', 140, 'M' },
-				{ 'H', 13, 'U' }
+				{ 'H', 13, 'U' },
+				{ '.', 13, '.' }
 		};
 	}
 
 	@Test(dataProvider = "charSwitcher")
-	public void charSwitcher(char initialCharacter, int versatz, char newCharacter) {
-		assertThat(rotKata.charSwitcher(initialCharacter, versatz),
-				is(newCharacter));
+	public void charSwitcher(char oldChar, int shiftNumber, char newChar) {
+		assertThat(rotKata.charSwitcher(oldChar, shiftNumber),
+				is(newChar));
 	}
 
 	@Test
-	public void rotKataService() {
-		assertThat(rotKata.rotKataService("HelloWorld", 13),
+	public void rotKataEncrypter() {
+		assertThat(rotKata.rotKataEncrypter("HelloWorld", 13),
 				is("URYYBJBEYQ"));
-		assertThat(rotKata.rotKataService("Hello World", 13), is("URYYB JBEYQ"));
+		// assertThat(rotKata.rotKataEncrypter("Hello World", 13), is("URYYB
+		// JBEYQ"));
 	}
 
 	// @DataProvider(name = "toASCII")

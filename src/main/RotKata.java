@@ -10,27 +10,27 @@ public class RotKata {
 	// return character;
 	// }
 
-	public char charSwitcher(char oldChar, int versatz) {
+	public char charSwitcher(char oldChar, int shiftNumber) {
 		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 		char newChar = oldChar;
-		if (versatz > alphabet.length) {
-			versatz = versatz % alphabet.length;
+		if (shiftNumber > alphabet.length) {
+			shiftNumber = shiftNumber % alphabet.length;
 		}
 
 		for (int i = 0; i <= alphabet.length; i++) {
 			if (oldChar == alphabet[i]) {
-				if (i >= alphabet.length - versatz) {
-					i = versatz - (alphabet.length - i);
-					return newChar = alphabet[i];
+				if (i >= alphabet.length - shiftNumber) {
+					i = shiftNumber - (alphabet.length - i);
+					return alphabet[i];
 				} else
-					return newChar = alphabet[i + versatz];
+					return alphabet[i + shiftNumber];
 			}
 		}
 		return newChar;
 	}
 
-	public String rotKataService(String word, int versatz) {
+	public String rotKataEncrypter(String word, int versatz) {
 		char[] keyword = grossschreibung(word).toCharArray();
 		for (int i = 0; i < keyword.length; i++) {
 			keyword[i] = charSwitcher(keyword[i], versatz);
