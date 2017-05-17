@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class RomanCharToIntTest {
 
-	private RomanCharToInt intNumber = new RomanCharToInt();
+	private RomanCharToInt romanCharToInt = new RomanCharToInt();
 
 	@DataProvider(name = "romanCharToInt")
 	public Object[][] createData1() {
@@ -28,6 +28,6 @@ public class RomanCharToIntTest {
 
 	@Test(dataProvider = "romanCharToInt")
 	public void romanCharToInt(char romanChar, int decimal) {
-		assertThat(intNumber.romanCharToInt(romanChar), is(decimal));
+		assertThat(romanCharToInt.romanCharToInt(romanChar), is(decimal));
 	}
 }

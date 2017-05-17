@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class RomanStringToIntTest {
 
-	private RomanStringToInt intNumber = new RomanStringToInt();
+	private RomanStringToInt romanStringToInt = new RomanStringToInt();
 
 	@DataProvider(name = "romanStringToInt")
 	public Object[][] createData1() {
@@ -22,6 +22,6 @@ public class RomanStringToIntTest {
 
 	@Test(dataProvider = "romanStringToInt")
 	public void romanStringToInt(String romanNumber, int decimal) {
-		assertThat(intNumber.romanStringToInt(romanNumber), is(decimal));
+		assertThat(romanStringToInt.romanStringToInt(romanNumber), is(decimal));
 	}
 }
