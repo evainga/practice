@@ -12,7 +12,7 @@ public class RotKataTest {
 
 	@Test
 	public void upperCaseAndFormat() {
-		assertThat(rotKata.upperCaseAndFormat("abcDßäüöä"), is("ABCDSSAEUEOEAE"));
+		assertThat(rotKata.toUpperCaseAndSubstituteUmlauts("abcDßäüöä"), is("ABCDSSAEUEOEAE"));
 	}
 
 	@DataProvider(name = "charSwitcher")
@@ -32,7 +32,7 @@ public class RotKataTest {
 
 	@Test(dataProvider = "charSwitcher")
 	public void charSwitcher(char oldChar, int shiftNumber, char newChar) {
-		assertThat(rotKata.charSwitcher(oldChar, shiftNumber),
+		assertThat(rotKata.rotateByFixedDistance(oldChar, shiftNumber),
 				is(newChar));
 	}
 
@@ -49,7 +49,7 @@ public class RotKataTest {
 
 	@Test(dataProvider = "encrypter")
 	public void encrypter(String oldWord, int shiftNumber, String newWord) {
-		assertThat(rotKata.encrypter(oldWord, shiftNumber),
+		assertThat(rotKata.encryptToRotKata(oldWord, shiftNumber),
 				is(newWord));
 
 	}

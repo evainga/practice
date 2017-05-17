@@ -1,35 +1,41 @@
 package main;
 
-public class RotKata {
+import java.util.List;
+import java.util.stream.Collectors;
 
-	public String upperCaseAndFormat(String word) {
+public class RotKata {
+	private List<Character> alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".chars().mapToObj(i -> (char) i)
+			.collect(Collectors.toList());
+	private int alphabetSize = alphabet.size();
+
+	public String toUpperCaseAndSubstituteUmlauts(String word) {
 		return word.toUpperCase().replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE");
 	}
 
-	public char charSwitcher(char oldChar, int shiftNumber) {
-		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+	public char rotateByFixedDistance(char oldChar, int shiftNumber) {
 
-		char newChar = oldChar;
-		if (shiftNumber > alphabet.length) {
-			shiftNumber = shiftNumber % alphabet.length;
+		if (shiftNumber > alphabetSize) {
+			shiftNumber = shiftNumber % alphabetSize;
 		}
 
-		for (int i = 0; i < alphabet.length; i++) {
-			if (oldChar == alphabet[i]) {
-				if (i >= alphabet.length - shiftNumber) {
-					i = shiftNumber - (alphabet.length - i);
-					return alphabet[i];
-				} else
-					return alphabet[i + shiftNumber];
-			}
+		if (!alphabet.contains(oldChar)) {
+			return oldChar;
 		}
-		return newChar;
+
+		int i = alphabet.indexOf(oldChar);
+
+		if (i >= alphabetSize - shiftNumber) {
+			i = shiftNumber - (alphabetSize - i);
+			return alphabet.get(i);
+		} else
+			return alphabet.get(i + shiftNumber);
+
 	}
 
-	public String encrypter(String word, int shiftNumber) {
-		char[] keyword = upperCaseAndFormat(word).toCharArray();
+	public String encryptToRotKata(String word, int shiftNumber) {
+		char[] keyword = toUpperCaseAndSubstituteUmlauts(word).toCharArray();
 		for (int i = 0; i < keyword.length; i++) {
-			keyword[i] = charSwitcher(keyword[i], shiftNumber);
+			keyword[i] = rotateByFixedDistance(keyword[i], shiftNumber);
 		}
 		return new String(keyword);
 	}
