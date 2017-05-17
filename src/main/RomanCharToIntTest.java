@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class RomanCharToIntTest {
 
-	RomanCharToInt intNumber = new RomanCharToInt();
+	private RomanCharToInt intNumber = new RomanCharToInt();
 
 	@DataProvider(name = "romanCharToInt")
 	public Object[][] createData1() {
