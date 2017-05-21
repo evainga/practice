@@ -9,14 +9,17 @@ public class RomanStringToInt {
 	private RomanCharToInt romanCharToInt = new RomanCharToInt();
 	private List<Integer> romanIntegerList = new ArrayList<Integer>();
 
-	private List<Integer> romanStringToInt(String romanString) {
+	List<Integer> romanStringToIntList(String romanString, boolean iscalledExternally) {
 
 		List<Character> romanNumberList = romanString.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
+
+		if (iscalledExternally) {
+			romanIntegerList.clear();
+		}
 
 		for (int i = 0; i < romanNumberList.size(); i++) {
 			romanIntegerList.add(romanCharToInt.romanCharToInt(romanNumberList.get(i)));
 		}
-
 		return romanIntegerList;
 	}
 
@@ -29,18 +32,18 @@ public class RomanStringToInt {
 			if (indexOfBigNumber > indexOfSmallNumber) {
 				romanIntegerList.set(indexOfSmallNumber, (smallNumber * -1));
 			}
-
 		}
 	}
 
-	public int result(String romanString, boolean iscalledExternally) {
+	public int romanStringToIntResult(String romanString, boolean iscalledExternally) {
+
+		int result = 0;
 
 		if (iscalledExternally) {
 			romanIntegerList.clear();
 		}
 
-		int result = 0;
-		romanStringToInt(romanString);
+		romanStringToIntList(romanString, false);
 
 		subtractor(1, 5);
 		subtractor(1, 10);
@@ -52,6 +55,5 @@ public class RomanStringToInt {
 		result = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
 
 		return result;
-
 	}
 }
