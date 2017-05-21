@@ -7,20 +7,51 @@ import java.util.stream.Collectors;
 public class RomanStringToInt {
 
 	private RomanCharToInt romanCharToInt = new RomanCharToInt();
+	private List<Integer> romanIntegerList = new ArrayList<Integer>();
 
-	public int romanStringToInt(String romanString) {
+	private List<Integer> romanStringToInt(String romanString) {
 
-		// int result = 0;
 		List<Character> romanNumberList = romanString.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
-		List<Integer> romanIntegerList = new ArrayList<Integer>();
 
 		for (int i = 0; i < romanNumberList.size(); i++) {
 			romanIntegerList.add(romanCharToInt.romanCharToInt(romanNumberList.get(i)));
 		}
 
-		int sum = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
+		return romanIntegerList;
+	}
 
-		return sum;
+	private void subtractor(int smallNumber, int bigNumber) {
+
+		if (romanIntegerList.contains(smallNumber) && romanIntegerList.contains(bigNumber)) {
+			int indexOfBigNumber = romanIntegerList.lastIndexOf(bigNumber);
+			int indexOfSmallNumber = romanIntegerList.indexOf(smallNumber);
+
+			if (indexOfBigNumber > indexOfSmallNumber) {
+				romanIntegerList.set(indexOfSmallNumber, (smallNumber * -1));
+			}
+
+		}
+	}
+
+	public int result(String romanString, boolean iscalledExternally) {
+
+		if (iscalledExternally) {
+			romanIntegerList.clear();
+		}
+
+		int result = 0;
+		romanStringToInt(romanString);
+
+		subtractor(1, 5);
+		subtractor(1, 10);
+		subtractor(10, 50);
+		subtractor(10, 100);
+		subtractor(100, 500);
+		subtractor(100, 1000);
+
+		result = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
+
+		return result;
 
 	}
 }
