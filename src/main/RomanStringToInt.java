@@ -1,23 +1,24 @@
 package main;
 
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RomanStringToInt {
 
-	RomanCharToInt romanCharToInt = new RomanCharToInt();
+	private RomanCharToInt romanCharToInt = new RomanCharToInt();
 
 	public int romanStringToInt(String romanString) {
 
-		// List<Character> romanNumberList = romanString.chars().mapToObj(i ->
-		// (char) i).collect(Collectors.toList());
-		char[] romanStringArray = romanString.toCharArray();
-		int[] romanIntArray = new int[romanStringArray.length];
+		// int result = 0;
+		List<Character> romanNumberList = romanString.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
+		List<Integer> romanIntegerList = new ArrayList<Integer>();
 
-		for (int i = 0; i < romanStringArray.length; i++) {
-			romanIntArray[i] = romanCharToInt.romanCharToInt(romanStringArray[i]);
+		for (int i = 0; i < romanNumberList.size(); i++) {
+			romanIntegerList.add(romanCharToInt.romanCharToInt(romanNumberList.get(i)));
 		}
 
-		int sum = IntStream.of(romanIntArray).sum();
+		int sum = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
 
 		return sum;
 

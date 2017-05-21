@@ -17,6 +17,8 @@ public class RomanStringToIntTest {
 				{ "MDCCCCLXXXIIII", 1984 },
 				{ "XXXV", 35 },
 				{ "MMMMMDDDII", 6502 },
+				{ "VII", 7 },
+				// { "IV", 4 },
 		};
 	}
 
