@@ -51,6 +51,8 @@ public class RomanStringToIntTest {
 				{ "CMLXXIX", 979 },
 				{ "MMXIII", 2013 },
 				{ "MCMLXXXIV", 1984 },
+				{ "BCD", 0 },
+				{ "XI I", 0 },
 		};
 	}
 

@@ -8,6 +8,7 @@ public class RomanStringToInt {
 
 	private RomanCharToInt romanCharToInt = new RomanCharToInt();
 	private List<Integer> romanIntegerList = new ArrayList<Integer>();
+	private RomanNumberValidator romanNumberValidator = new RomanNumberValidator();
 
 	List<Integer> romanStringToIntList(String romanString, boolean iscalledExternally) {
 
@@ -43,17 +44,20 @@ public class RomanStringToInt {
 			romanIntegerList.clear();
 		}
 
-		romanStringToIntList(romanString, false);
+		if (romanNumberValidator.validateLetters(romanString)) {
 
-		subtractor(1, 5);
-		subtractor(1, 10);
-		subtractor(10, 50);
-		subtractor(10, 100);
-		subtractor(100, 500);
-		subtractor(100, 1000);
+			romanStringToIntList(romanString, false);
 
-		result = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
+			subtractor(1, 5);
+			subtractor(1, 10);
+			subtractor(10, 50);
+			subtractor(10, 100);
+			subtractor(100, 500);
+			subtractor(100, 1000);
 
+			result = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
+
+		}
 		return result;
 	}
 }
