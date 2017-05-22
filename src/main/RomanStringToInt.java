@@ -7,24 +7,19 @@ import java.util.stream.Collectors;
 public class RomanStringToInt {
 
 	private RomanCharToInt romanCharToInt = new RomanCharToInt();
-	private List<Integer> romanIntegerList = new ArrayList<Integer>();
 	private RomanNumberValidator romanNumberValidator = new RomanNumberValidator();
 
-	List<Integer> romanStringToIntList(String romanString, boolean iscalledExternally) {
-
+	List<Integer> romanStringToIntList(String romanString) {
+		List<Integer> intermediateList = new ArrayList<Integer>();
 		List<Character> romanNumberList = romanString.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
 
-		if (iscalledExternally) {
-			romanIntegerList.clear();
-		}
-
 		for (int i = 0; i < romanNumberList.size(); i++) {
-			romanIntegerList.add(romanCharToInt.romanCharToInt(romanNumberList.get(i)));
+			intermediateList.add(romanCharToInt.romanCharToInt(romanNumberList.get(i)));
 		}
-		return romanIntegerList;
+		return intermediateList;
 	}
 
-	private void subtractor(int smallNumber, int bigNumber) {
+	private List<Integer> subtractor(int smallNumber, int bigNumber, List<Integer> romanIntegerList) {
 
 		if (romanIntegerList.contains(smallNumber) && romanIntegerList.contains(bigNumber)) {
 			int indexOfBigNumber = romanIntegerList.lastIndexOf(bigNumber);
@@ -34,26 +29,23 @@ public class RomanStringToInt {
 				romanIntegerList.set(indexOfSmallNumber, (smallNumber * -1));
 			}
 		}
+		return new ArrayList<>(romanIntegerList);
 	}
 
-	public int romanStringToIntResult(String romanString, boolean iscalledExternally) {
+	public int romanStringToIntResult(String romanString) {
 
 		int result = 0;
 
-		if (iscalledExternally) {
-			romanIntegerList.clear();
-		}
-
 		if (romanNumberValidator.validateLetters(romanString)) {
 
-			romanStringToIntList(romanString, false);
+			List<Integer> romanIntegerList = romanStringToIntList(romanString);
 
-			subtractor(1, 5);
-			subtractor(1, 10);
-			subtractor(10, 50);
-			subtractor(10, 100);
-			subtractor(100, 500);
-			subtractor(100, 1000);
+			romanIntegerList = subtractor(1, 5, romanIntegerList);
+			romanIntegerList = subtractor(1, 10, romanIntegerList);
+			romanIntegerList = subtractor(10, 50, romanIntegerList);
+			romanIntegerList = subtractor(10, 100, romanIntegerList);
+			romanIntegerList = subtractor(100, 500, romanIntegerList);
+			romanIntegerList = subtractor(100, 1000, romanIntegerList);
 
 			result = romanIntegerList.stream().mapToInt(Integer::intValue).sum();
 

@@ -4,7 +4,6 @@ package main;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,20 +17,20 @@ public class RomanStringToIntTest {
 	@DataProvider(name = "romanStringToIntList")
 	public Object[][] createData1() {
 		return new Object[][] {
-				{ "I", new ArrayList<Integer>(Arrays.asList(1)) },
-				{ "II", new ArrayList<Integer>(Arrays.asList(1, 1)) },
-				{ "IV", new ArrayList<Integer>(Arrays.asList(1, 5)) },
-				{ "XLI", new ArrayList<Integer>(Arrays.asList(10, 50, 1)) },
-				{ "XLIX", new ArrayList<Integer>(Arrays.asList(10, 50, 1, 10)) },
-				{ "XCVII", new ArrayList<Integer>(Arrays.asList(10, 100, 5, 1, 1)) },
-				{ "CMLXXIX", new ArrayList<Integer>(Arrays.asList(100, 1000, 50, 10, 10, 1, 10)) },
-				{ "MCMLXXXIV", new ArrayList<Integer>(Arrays.asList(1000, 100, 1000, 50, 10, 10, 10, 1, 5)) },
+				{ "I", Arrays.asList(1) },
+				{ "II", Arrays.asList(1, 1) },
+				{ "IV", Arrays.asList(1, 5) },
+				{ "XLI", Arrays.asList(10, 50, 1) },
+				{ "XLIX", Arrays.asList(10, 50, 1, 10) },
+				{ "XCVII", Arrays.asList(10, 100, 5, 1, 1) },
+				{ "CMLXXIX", Arrays.asList(100, 1000, 50, 10, 10, 1, 10) },
+				{ "MCMLXXXIV", Arrays.asList(1000, 100, 1000, 50, 10, 10, 10, 1, 5) },
 		};
 	}
 
 	@Test(dataProvider = "romanStringToIntList")
 	public void romanStringToIntList(String romanNumber, List<Integer> intList) {
-		assertThat(romanStringToInt.romanStringToIntList(romanNumber, true), is(intList));
+		assertThat(romanStringToInt.romanStringToIntList(romanNumber), is(intList));
 	}
 
 	@DataProvider(name = "romanStringToIntResult")
@@ -58,6 +57,6 @@ public class RomanStringToIntTest {
 
 	@Test(dataProvider = "romanStringToIntResult")
 	public void romanStringToIntResult(String romanNumber, int decimal) {
-		assertThat(romanStringToInt.romanStringToIntResult(romanNumber, true), is(decimal));
+		assertThat(romanStringToInt.romanStringToIntResult(romanNumber), is(decimal));
 	}
 }
