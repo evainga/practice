@@ -23,7 +23,6 @@ public class CharCounterTest {
 				allOf(hasEntry('D', 1), hasEntry('a', 2), hasEntry('s', 2), hasEntry(' ', 3), hasEntry('d', 1),
 						hasEntry('r', 1), hasEntry('f', 1), hasEntry('n', 2), hasEntry('i', 2), hasEntry('c', 1),
 						hasEntry('h', 1), hasEntry('e', 1), hasEntry('t', 1)));
-
 	}
 
 	@DataProvider(name = "sizeProvider")
@@ -32,6 +31,7 @@ public class CharCounterTest {
 				{ "hallllooo", 4 },
 				{ "hallooolloo", 4 },
 				{ "Das darf nicht sein", 13 },
+				{ "", 0 },
 
 		};
 	}

@@ -9,7 +9,7 @@ public class CharCounter {
 
 	public Map<Character, Integer> countChars(String word) {
 		List<Character> charList = word.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
-		Map<Character, Integer> charCountMap = new HashMap<Character, Integer>();
+		Map<Character, Integer> charCountMap = new HashMap<>();
 
 		for (int i = 0; i < charList.size(); i++) {
 			char currentLetter = charList.get(i);
