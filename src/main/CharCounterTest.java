@@ -43,4 +43,19 @@ public class CharCounterTest {
 
 	}
 
+	@DataProvider(name = "charValidator")
+	public Object[][] createData1() {
+		return new Object[][] {
+				{ null, false },
+				{ "Das darf nicht sein", true },
+				{ "&", false },
+
+		};
+	}
+
+	@Test(dataProvider = "charValidator")
+	public void romanNumberValidator(String word, boolean valid) {
+		assertThat(charCounter.validateChars(word), is(valid));
+	}
+
 }
