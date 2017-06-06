@@ -2,6 +2,7 @@ package priority;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -14,16 +15,15 @@ public class PriorityQueueTest {
 
 	@Test
 	public void enqueueAndGetQueue() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
-		iceCreamQueue.enqueue("Berta", 2);
-		iceCreamQueue.enqueue("Berta", 2);
-		iceCreamQueue.enqueue("Bert", 4);
-		assertThat(iceCreamQueue.getQueue(), hasSize(3));
+		queue.enqueue("Berta", 2);
+		queue.enqueue("Berta", 2);
+		queue.enqueue("Bert", 4);
+		assertThat(queue.getQueue(), hasSize(3));
+		assertThat(queue.getQueue(), hasItem(new PriorityObject("Berta", 2)));
 	}
 
 	@Test
 	public void getQueue() {
-		queue.enqueue("Bert", 3);
 		assertThat(queue.getQueue(), not(empty()));
 	}
 
@@ -38,10 +38,10 @@ public class PriorityQueueTest {
 	@Test
 	public void dequeue() {
 		PriorityQueue iceCreamQueue = new PriorityQueue();
-		iceCreamQueue.enqueue("Hans", 2);
-		iceCreamQueue.enqueue("Bert", 3);
-		iceCreamQueue.enqueue("Berta", 3);
-		iceCreamQueue.enqueue("Anne", 1);
+		iceCreamQueue.enqueue("Hans", 1);
+		iceCreamQueue.enqueue("Bert", 2);
+		iceCreamQueue.enqueue("Berta", 2);
+		iceCreamQueue.enqueue("Anne", 4);
 		iceCreamQueue.dequeue();
 		iceCreamQueue.dequeue();
 		// assertThat(iceCreamQueue.dequeue(), is("Anne"));

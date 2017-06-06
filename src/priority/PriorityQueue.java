@@ -17,7 +17,22 @@ public class PriorityQueue {
 	}
 
 	PriorityObject dequeue() {
-		return queue.remove(0);
+		List<Integer> priorities = new ArrayList<>();
+		int priorityIndex = 0;
+
+		for (int i = 0; i < queue.size(); i++) {
+			priorities.add(queue.get(i).getPriority());
+		}
+
+		int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
+
+		for (int i = 0; i < queue.size(); i++) {
+			if (queue.get(i).getPriority() == minimum) {
+				priorityIndex = i;
+			}
+		}
+
+		return queue.remove(priorityIndex);
 	}
 
 	int count() {

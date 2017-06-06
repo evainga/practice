@@ -11,7 +11,7 @@ public class PriorityObject {
 	public PriorityObject(String elementName, int priority) {
 		setObjectName(elementName);
 		setPriority(priority);
-		setCreationTime(ZonedDateTime.now());
+		setCreationTime();
 	}
 
 	public String getObjectName() {
@@ -34,8 +34,8 @@ public class PriorityObject {
 		return creationTime;
 	}
 
-	public void setCreationTime(ZonedDateTime creationTime) {
-		this.creationTime = creationTime;
+	public void setCreationTime() {
+		creationTime = ZonedDateTime.now();
 	}
 
 }
