@@ -29,14 +29,7 @@ public class CharCounter {
 	}
 
 	public boolean validateChars(String word) {
-
-		if (!word.matches("[a-zA-Z0-9!?:;,. ]*")) {
-			System.out.println("This is not a valid Character. Please enter a valid Character.");
-			return false;
-		}
-
-		return true;
-
+		return word != null && word.matches("[a-zA-Z0-9!?:;,. ]*");
 	}
 
 }

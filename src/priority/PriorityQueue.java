@@ -1,63 +1,58 @@
 package priority;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PriorityQueue {
 
-	private List<PriorityObject> queue = new ArrayList<>();
+	List<PriorityObject> queue = new ArrayList<>();
 
-	void enqueue(String element, int priority) {
-		PriorityObject queueObject = new PriorityObject(element, priority);
-		queue.add(queueObject);
+	public void enqueue(String element, int priority) {
+		queue.add(new PriorityObject(element, priority));
 	}
 
-	public List<PriorityObject> getQueue() {
-		return queue;
-	}
-
-	PriorityObject dequeue() {
-		List<Integer> priorities = new ArrayList<>();
-		List<ZonedDateTime> times = new ArrayList<>();
+	public PriorityObject dequeue() {
+		List<Long> times = new ArrayList<>();
 		int priorityIndex = 0;
-		int timeIndex = 0;
-		int count = 0;
+		int samePriorityCount = 0;
 
-		for (int i = 0; i < queue.size(); i++) {
-			priorities.add(queue.get(i).getPriority());
-		}
+		List<Integer> priorities = queue.stream()
+				.map(priorityObject -> priorityObject.getPriority())
+				.collect(Collectors.toList());
 
 		int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
 
 		for (int i = 0; i < queue.size(); i++) {
-			if (queue.get(i).getPriority() == minimum) {
+
+			PriorityObject priorityObject = queue.get(i);
+			if (priorityObject.getPriority() == minimum) {
 				priorityIndex = i;
-				count++;
-				times.add(queue.get(i).getCreationTime());
+				samePriorityCount++;
+				times.add(priorityObject.getCreationTime());
 			}
 		}
 
-		if (count <= 1) {
+		if (samePriorityCount <= 1) {
 			return queue.remove(priorityIndex);
 		}
 
 		else {
 
-			ZonedDateTime oldest = times.stream().max(ZonedDateTime::compareTo).get();
+			Long oldest = times.stream().max(Comparator.reverseOrder()).get();
 
 			for (int i = 0; i < queue.size(); i++) {
 				if (queue.get(i).getCreationTime() == oldest) {
-					timeIndex = i;
+					return queue.remove(i);
 				}
 			}
-
-			return queue.remove(timeIndex);
+			throw new IllegalStateException("multiple priorities did not lead to return value");
 		}
 
 	}
 
-	int count() {
+	public int count() {
 		int numberOfElements = queue.size();
 		return numberOfElements;
 	}

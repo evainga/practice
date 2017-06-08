@@ -1,51 +1,45 @@
 package priority;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 
 import org.testng.annotations.Test;
 
 public class PriorityQueueTest {
 
-	PriorityQueue queue = new PriorityQueue();
+	private PriorityQueue priorityQueue = new PriorityQueue();
 
 	@Test
-	public void enqueueAndGetQueue() {
-		queue.enqueue("Berta", 2);
-		queue.enqueue("Berta", 2);
-		queue.enqueue("Bert", 4);
-		assertThat(queue.getQueue(), hasSize(3));
-		// assertThat(queue.getQueue(), hasItem(new PriorityObject("Berta",
-		// 2)));
-	}
+	public void enqueueAndCount() {
+		priorityQueue.enqueue("Berta", 2);
+		priorityQueue.enqueue("Berta", 2);
+		priorityQueue.enqueue("Bert", 4);
+		assertThat(priorityQueue.count(), is(3));
 
-	@Test
-	public void getQueue() {
-		assertThat(queue.getQueue(), not(empty()));
-	}
-
-	@Test
-	public void count() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
-		iceCreamQueue.enqueue("Bert", 3);
-		iceCreamQueue.enqueue("Berta", 4);
-		assertThat(iceCreamQueue.count(), is(2));
+		assertThat(priorityQueue.queue, hasSize(3));
 	}
 
 	@Test
 	public void dequeue() {
 		PriorityQueue iceCreamQueue = new PriorityQueue();
 		iceCreamQueue.enqueue("Hans", 1);
-		iceCreamQueue.enqueue("Bert", 2);
+		iceCreamQueue.enqueue("Bert", 4);
+		iceCreamQueue.enqueue("Berta", 2);
 		iceCreamQueue.enqueue("Berta", 2);
 		iceCreamQueue.enqueue("Anne", 4);
-		iceCreamQueue.dequeue();
-		iceCreamQueue.dequeue();
-		// assertThat(iceCreamQueue.dequeue(), is("Anne"));
-		// assertThat(iceCreamQueue.dequeue(), is("Hans"));
-		assertThat(iceCreamQueue.count(), is(2));
+		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Hans"));
+		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Berta"));
+		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Berta"));
+		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Bert"));
+		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Anne"));
+		// iceCreamQueue.dequeue();
 	}
 }
+
+// leere queue dequeuen
+// assertThat am Ende mit count
+
+// Testfall verschiedene Elemente gleiche Prio
+
+// dequeue mit Zeitsortierung
