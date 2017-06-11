@@ -1,10 +1,12 @@
 package priority;
 
+import java.time.ZonedDateTime;
+
 public class PriorityObject {
 
 	private String objectName;
 	private int priority;
-	private long creationTime;
+	private ZonedDateTime creationTime;
 
 	public PriorityObject(String elementName, int priority) {
 		setObjectName(elementName);
@@ -28,12 +30,12 @@ public class PriorityObject {
 		this.priority = priority;
 	}
 
-	public long getCreationTime() {
+	public ZonedDateTime getCreationTime() {
 		return creationTime;
 	}
 
 	public void setCreationTime() {
-		creationTime = System.currentTimeMillis();
+		creationTime = ZonedDateTime.now();
 	}
 
 }

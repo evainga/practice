@@ -1,5 +1,6 @@
 package priority;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,7 +15,7 @@ public class PriorityQueue {
 	}
 
 	public PriorityObject dequeue() {
-		List<Long> times = new ArrayList<>();
+		List<ZonedDateTime> times = new ArrayList<>();
 		int priorityIndex = 0;
 		int samePriorityCount = 0;
 
@@ -22,33 +23,37 @@ public class PriorityQueue {
 				.map(priorityObject -> priorityObject.getPriority())
 				.collect(Collectors.toList());
 
-		int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
-
-		for (int i = 0; i < queue.size(); i++) {
-
-			PriorityObject priorityObject = queue.get(i);
-			if (priorityObject.getPriority() == minimum) {
-				priorityIndex = i;
-				samePriorityCount++;
-				times.add(priorityObject.getCreationTime());
-			}
-		}
-
-		if (samePriorityCount <= 1) {
-			return queue.remove(priorityIndex);
-		}
-
-		else {
-
-			Long oldest = times.stream().max(Comparator.reverseOrder()).get();
+		if (!priorities.isEmpty()) {
+			int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
 
 			for (int i = 0; i < queue.size(); i++) {
-				if (queue.get(i).getCreationTime() == oldest) {
-					return queue.remove(i);
+
+				PriorityObject priorityObject = queue.get(i);
+
+				if (priorityObject.getPriority() == minimum) {
+					priorityIndex = i;
+					samePriorityCount++;
+					times.add(priorityObject.getCreationTime());
 				}
 			}
-			throw new IllegalStateException("multiple priorities did not lead to return value");
+
+			if (samePriorityCount <= 1) {
+				return queue.remove(priorityIndex);
+			}
+
+			else {
+
+				ZonedDateTime oldest = times.stream().max(Comparator.reverseOrder()).get();
+
+				for (int i = 0; i < queue.size(); i++) {
+					if (queue.get(i).getCreationTime() == oldest) {
+						return queue.remove(i);
+					}
+				}
+				throw new IllegalStateException("multiple priorities did not lead to return value");
+			}
 		}
+		return null;
 
 	}
 
