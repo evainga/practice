@@ -1,6 +1,5 @@
 package stack;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,27 +9,33 @@ public class Stack {
 	List<StackObject> stack = new ArrayList<>();
 
 	public void push(String element) {
-		stack.add(new StackObject(element));
+		stack.add(new StackObject(element, stack.size()));
 	}
 
 	public StackObject pop() {
-		List<ZonedDateTime> stackTimes = new ArrayList<>();
+		if (stack.isEmpty())
+			throw new IllegalStateException("No Object in stack found");
 
-		if (!stackTimes.isEmpty()) {
-			for (int i = 0; i < stack.size(); i++) {
-				StackObject stackObject = stack.get(i);
-				stackTimes.add(stackObject.getCreationTime());
-			}
+		List<Integer> stackTimes = new ArrayList<>();
 
-			ZonedDateTime youngest = stackTimes.stream().max(Comparator.naturalOrder()).get();
-
-			for (int i = 0; i < stack.size(); i++) {
-				if (stack.get(i).getCreationTime() == youngest) {
-					return stack.remove(i);
-				}
-			}
+		for (int i = 0; i < stack.size(); i++) {
+			StackObject stackObject = stack.get(i);
+			stackTimes.add(stackObject.getCreationIndex());
 		}
-		throw new IllegalStateException("No Object in stack found");
+
+		int youngest = stackTimes.stream().max(Comparator.naturalOrder()).get();
+
+		StackObject stackObject = stack.stream()
+				.filter(item -> matchesCreationIndex(youngest, item))
+				.findFirst()
+				.orElseThrow(() -> new IllegalStateException("multiple priorities did not lead to return value"));
+
+		return stack.remove(stack.indexOf(stackObject));
+
+	}
+
+	private boolean matchesCreationIndex(int youngest, StackObject item) {
+		return item.getCreationIndex() == youngest;
 	}
 
 	public int count() {

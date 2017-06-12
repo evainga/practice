@@ -107,6 +107,5 @@ public class PriorityQueueTest {
 		iceCreamQueue.dequeue();
 		assertThat(iceCreamQueue.count(), is(0));
 		assertThat(iceCreamQueue.dequeue(), is(nullValue()));
-
 	}
 }
