@@ -57,7 +57,26 @@ public class PriorityQueueTest {
 		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Anne"));
 		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Anne"));
 		assertThat(iceCreamQueue.dequeue().getObjectName(), is("Jo"));
+	}
 
+	@Test
+	public void dequeueSamePrioAndNameObjects() {
+		PriorityQueue iceCreamQueue = new PriorityQueue();
+		iceCreamQueue.enqueue("Anna", 3);
+		iceCreamQueue.enqueue("Bert", 3);
+		iceCreamQueue.enqueue("Anna", 3);
+		iceCreamQueue.enqueue("Berthold", 3);
+		iceCreamQueue.enqueue("Anna", 3);
+		iceCreamQueue.enqueue("Bertram", 3);
+		iceCreamQueue.enqueue("Anna", 3);
+
+		for (int i = 0; i < 7; i++) {
+			PriorityObject name = iceCreamQueue.dequeue();
+			if (i % 2 == 0) {
+				assertThat(name.getObjectName(), is("Anna"));
+				assertThat(name.getCreationIndex(), is(i));
+			}
+		}
 	}
 
 	@Test

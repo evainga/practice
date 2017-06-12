@@ -1,6 +1,5 @@
 package priority;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,11 +10,14 @@ public class PriorityQueue {
 	List<PriorityObject> queue = new ArrayList<>();
 
 	public void enqueue(String element, int priority) {
-		queue.add(new PriorityObject(element, priority));
+		queue.add(new PriorityObject(element, priority, queue.size()));
 	}
 
 	public PriorityObject dequeue() {
-		List<ZonedDateTime> times = new ArrayList<>();
+		if (queue.isEmpty())
+			return null;
+
+		List<Integer> indices = new ArrayList<>();
 		int priorityIndex = 0;
 		int samePriorityCount = 0;
 
@@ -23,38 +25,33 @@ public class PriorityQueue {
 				.map(priorityObject -> priorityObject.getPriority())
 				.collect(Collectors.toList());
 
-		if (!priorities.isEmpty()) {
-			int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
+		int minimum = priorities.stream().mapToInt(Integer::intValue).min().getAsInt();
 
-			for (int i = 0; i < queue.size(); i++) {
-
-				PriorityObject priorityObject = queue.get(i);
-
-				if (priorityObject.getPriority() == minimum) {
-					priorityIndex = i;
-					samePriorityCount++;
-					times.add(priorityObject.getCreationTime());
-				}
-			}
-
-			if (samePriorityCount <= 1) {
-				return queue.remove(priorityIndex);
-			}
-
-			else {
-
-				ZonedDateTime oldest = times.stream().max(Comparator.reverseOrder()).get();
-
-				for (int i = 0; i < queue.size(); i++) {
-					if (queue.get(i).getCreationTime() == oldest) {
-						return queue.remove(i);
-					}
-				}
-				throw new IllegalStateException("multiple priorities did not lead to return value");
+		for (int i = 0; i < queue.size(); i++) {
+			PriorityObject priorityObject = queue.get(i);
+			if (priorityObject.getPriority() == minimum) {
+				priorityIndex = i;
+				samePriorityCount++;
+				indices.add(priorityObject.getCreationIndex());
 			}
 		}
-		return null;
 
+		if (samePriorityCount <= 1) {
+			return queue.remove(priorityIndex);
+		} else {
+			int oldest = indices.stream().max(Comparator.reverseOrder()).get();
+
+			PriorityObject priorityObject = queue.stream()
+					.filter(item -> matchesCreationIndex(oldest, item))
+					.findFirst()
+					.orElseThrow(() -> new IllegalStateException("multiple priorities did not lead to return value"));
+
+			return queue.remove(queue.indexOf(priorityObject));
+		}
+	}
+
+	private boolean matchesCreationIndex(int oldest, PriorityObject item) {
+		return item.getCreationIndex() == oldest;
 	}
 
 	public int count() {
