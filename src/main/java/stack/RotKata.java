@@ -1,4 +1,4 @@
-package main;
+package stack;
 
 import java.util.List;
 import java.util.stream.Collectors;

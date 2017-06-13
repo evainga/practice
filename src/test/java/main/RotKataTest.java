@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.is;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import stack.RotKata;
+
 public class RotKataTest {
 
 	RotKata rotKata = new RotKata();
