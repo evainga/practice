@@ -1,9 +1,11 @@
-package de.smallStuff;
+package de.regex;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import org.testng.annotations.Test;
+
+import de.regex.RegEx;
 
 public class RegExTest {
 

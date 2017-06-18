@@ -1,4 +1,4 @@
-package de.smallStuff;
+package de.regex;
 
 public class RegEx {
 
