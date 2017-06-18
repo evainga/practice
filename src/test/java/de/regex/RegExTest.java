@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 
 import org.testng.annotations.Test;
 
-import de.regex.RegEx;
-
 public class RegExTest {
 
 	RegEx word = new RegEx();
