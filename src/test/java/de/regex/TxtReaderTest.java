@@ -13,6 +13,6 @@ public class TxtReaderTest {
 
 	@Test
 	public void txtToString() throws IOException {
-		assertThat(filereader.txtToString(), startsWith("4. The Master ascenden the high seat."));
+		assertThat(filereader.txtToString(), startsWith("4. The Master ascended the high seat."));
 	}
 }
