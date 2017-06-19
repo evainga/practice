@@ -13,8 +13,8 @@ public class TxtReaderTest {
 
 	@Test
 	public void txtToString() throws IOException {
-		assertThat(fileReader.txtToString(), startsWith("4. The Master ascended the high seat."));
-		assertThat(fileReader.txtToString(),
+		assertThat(fileReader.txtToString("/guest-and-host.txt"), startsWith("4. The Master ascended the high seat."));
+		assertThat(fileReader.txtToString("/guest-and-host.txt"),
 				endsWith("Rinzai‘s (Linji) host and guest, ask the head monks of the two halls."));
 	}
 }

@@ -6,8 +6,16 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 public class TxtReader {
-	public String txtToString() throws IOException {
-		String filename = TxtReader.class.getResource("/guest-and-host.txt").getFile();
+
+	String filepath = "/guest-and-host.txt";
+
+	public String txtToString(String filepath) throws IOException {
+		this.filepath = filepath;
+		String filename = TxtReader.class.getResource(filepath).getFile();
 		return FileUtils.readFileToString(new File(filename), "UTF-8");
 	}
+
+	// public String getfilePath(){
+	// return "/guest-and-host.txt";
+	// }
 }

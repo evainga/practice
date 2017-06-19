@@ -15,7 +15,7 @@ public class WordFinder {
 	}
 
 	public List<String> txtToWordList() throws IOException {
-		return getWords(fileReader.txtToString());
+		return getWords(fileReader.txtToString(fileReader.filepath));
 	}
 
 	public List<String> getWordsThatStartWithUpperCase() throws IOException {
