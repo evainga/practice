@@ -39,8 +39,10 @@ public class WordFinderTest {
 		assertThat(wordFinder.getWordsThatStartWithUpperCase(), hasItem("Heshang"));
 		assertThat(wordFinder.getWordsThatStartWithUpperCase(), hasItem("Rinzai‘s"));
 		assertThat(wordFinder.getWordsThatStartWithUpperCase(), hasItem("Oshô"));
-		// check with Marco why not options are also green here
-		assertThat(wordFinder.getWordsThatStartWithUpperCase(), hasItem(not("the")));
+		assertThat(wordFinder.getWordsThatStartWithUpperCase(), not(hasItem("the")));
 	}
 
 }
+
+// nicht auf eine Datei festgelegt sein sondern string(=pfad) eingeben
+// allgemeine Zeichen, Leerzeichen/ dezimal

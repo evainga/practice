@@ -7,27 +7,27 @@ import java.util.List;
 
 public class WordFinder {
 
-	List<String> getWords(String string) {
+	private TxtReader fileReader = new TxtReader();
+
+	public List<String> getWords(String string) {
 		string = string.replaceAll("[^\\wô‘ ]", "");
-		List<String> wordList = new ArrayList<String>(Arrays.asList(string.split("\\s+")));
-		return wordList;
+		return Arrays.asList(string.split("\\s+"));
 	}
 
-	List<String> txtToWordList() throws IOException {
-		TxtReader fileReader = new TxtReader();
+	public List<String> txtToWordList() throws IOException {
 		return getWords(fileReader.txtToString());
 	}
 
-	List<String> getWordsThatStartWithUpperCase() throws IOException {
-		List<String> oldList = txtToWordList();
+	public List<String> getWordsThatStartWithUpperCase() throws IOException {
+		List<String> allWords = txtToWordList();
 		RegEx regex = new RegEx();
-		List<String> filteredList = new ArrayList<String>();
-		for (int i = 0; i < oldList.size(); i++) {
-			if (regex.startsWithUpperCase(oldList.get(i))) {
-				filteredList.add(oldList.get(i));
+		List<String> filteredWords = new ArrayList<>();
+		for (int i = 0; i < allWords.size(); i++) {
+			if (regex.startsWithUpperCase(allWords.get(i))) {
+				filteredWords.add(allWords.get(i));
 			}
 		}
-		return filteredList;
+		return filteredWords;
 	}
 
 }
