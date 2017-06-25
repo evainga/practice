@@ -7,9 +7,9 @@ import static org.hamcrest.Matchers.nullValue;
 
 import org.testng.annotations.Test;
 
-public class PriorityQueueTest {
+public class PriorityQueueStreamsTest {
 
-	private PriorityQueue priorityQueue = new PriorityQueue();
+	private PriorityQueueStreams priorityQueue = new PriorityQueueStreams();
 
 	@Test
 	public void enqueueAndCount() {
@@ -23,7 +23,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueDifferentPrioObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueStreams iceCreamQueue = new PriorityQueueStreams();
 		iceCreamQueue.enqueue("Hans", 10);
 		iceCreamQueue.enqueue("Berta", 4);
 		iceCreamQueue.enqueue("Bert", 3);
@@ -38,7 +38,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueSamePrioObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueStreams iceCreamQueue = new PriorityQueueStreams();
 		iceCreamQueue.enqueue("Hans", 3);
 		iceCreamQueue.enqueue("Berta", 3);
 		iceCreamQueue.enqueue("Bert", 3);
@@ -61,7 +61,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueSamePrioAndNameObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueStreams iceCreamQueue = new PriorityQueueStreams();
 		iceCreamQueue.enqueue("Anna", 3);
 		iceCreamQueue.enqueue("Bert", 3);
 		iceCreamQueue.enqueue("Anna", 3);
@@ -81,7 +81,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueRandomObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueStreams iceCreamQueue = new PriorityQueueStreams();
 		iceCreamQueue.enqueue("Hans", 1);
 		iceCreamQueue.enqueue("Bert", 4);
 		iceCreamQueue.enqueue("Berta", 2);
@@ -102,7 +102,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueEmptyQueue() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueStreams iceCreamQueue = new PriorityQueueStreams();
 		iceCreamQueue.dequeue();
 		iceCreamQueue.dequeue();
 		assertThat(iceCreamQueue.count(), is(0));

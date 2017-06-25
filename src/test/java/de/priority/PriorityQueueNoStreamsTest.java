@@ -7,23 +7,23 @@ import static org.hamcrest.Matchers.nullValue;
 
 import org.testng.annotations.Test;
 
-public class PriorityQueueTest {
+public class PriorityQueueNoStreamsTest {
 
-	private PriorityQueue priorityQueue = new PriorityQueue();
+	private PriorityQueueNoStreams priorityQueueNoStreams = new PriorityQueueNoStreams();
 
 	@Test
 	public void enqueueAndCount() {
-		priorityQueue.enqueue("Berta", 2);
-		priorityQueue.enqueue("Berta", 2);
-		priorityQueue.enqueue("Bert", 4);
-		assertThat(priorityQueue.count(), is(3));
+		priorityQueueNoStreams.enqueue("Berta", 2);
+		priorityQueueNoStreams.enqueue("Berta", 2);
+		priorityQueueNoStreams.enqueue("Bert", 4);
+		assertThat(priorityQueueNoStreams.count(), is(3));
 
-		assertThat(priorityQueue.queue, hasSize(3));
+		assertThat(priorityQueueNoStreams.queue, hasSize(3));
 	}
 
 	@Test
 	public void dequeueDifferentPrioObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueNoStreams iceCreamQueue = new PriorityQueueNoStreams();
 		iceCreamQueue.enqueue("Hans", 10);
 		iceCreamQueue.enqueue("Berta", 4);
 		iceCreamQueue.enqueue("Bert", 3);
@@ -38,7 +38,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueSamePrioObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueNoStreams iceCreamQueue = new PriorityQueueNoStreams();
 		iceCreamQueue.enqueue("Hans", 3);
 		iceCreamQueue.enqueue("Berta", 3);
 		iceCreamQueue.enqueue("Bert", 3);
@@ -61,7 +61,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueSamePrioAndNameObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueNoStreams iceCreamQueue = new PriorityQueueNoStreams();
 		iceCreamQueue.enqueue("Anna", 3);
 		iceCreamQueue.enqueue("Bert", 3);
 		iceCreamQueue.enqueue("Anna", 3);
@@ -81,7 +81,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueRandomObjects() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueNoStreams iceCreamQueue = new PriorityQueueNoStreams();
 		iceCreamQueue.enqueue("Hans", 1);
 		iceCreamQueue.enqueue("Bert", 4);
 		iceCreamQueue.enqueue("Berta", 2);
@@ -102,7 +102,7 @@ public class PriorityQueueTest {
 
 	@Test
 	public void dequeueEmptyQueue() {
-		PriorityQueue iceCreamQueue = new PriorityQueue();
+		PriorityQueueNoStreams iceCreamQueue = new PriorityQueueNoStreams();
 		iceCreamQueue.dequeue();
 		iceCreamQueue.dequeue();
 		assertThat(iceCreamQueue.count(), is(0));
