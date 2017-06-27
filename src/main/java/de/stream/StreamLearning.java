@@ -1,8 +1,16 @@
+package de.stream;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StreamTesting {
+public class StreamLearning {
+
+	public List<String> playAround() {
+		return Arrays.asList("b1", "a2", "b1", "c2", "c1").stream()
+				.filter(item -> item.startsWith("a"))
+				.collect(Collectors.toList());
+	}
 
 	public static void main(String[] args) {
 
@@ -26,7 +34,6 @@ public class StreamTesting {
 				.map(character -> character.toString() + "A")
 				.collect(Collectors.toList())
 				.forEach(System.out::print);
-
 	}
 
 }
