@@ -42,6 +42,13 @@ public class StreamLearningTest {
 		assertThat(learning.makeNewShoesInMySize().get(1).getColor(), is("red"));
 		assertThat(learning.makeNewShoesInMySize().get(1).getSize(), is(38));
 		assertThat(learning.makeNewShoesInMySize().get(1).isHighHeel(), is(false));
+	}
 
+	@Test
+	public void getWiteShoes() {
+		assertThat(learning.getWhiteShoes(), hasSize(2));
+		assertThat(learning.getWhiteShoes().get(0).getColor(), is("white"));
+		assertThat(learning.getWhiteShoes().get(0).getSize(), is(39));
+		assertThat(learning.getWhiteShoes().get(0).isHighHeel(), is(false));
 	}
 }

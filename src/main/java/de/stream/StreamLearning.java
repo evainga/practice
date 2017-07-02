@@ -3,6 +3,7 @@ package de.stream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamLearning {
 	List<ShoePair> shoePairs = Arrays.asList(
@@ -43,6 +44,16 @@ public class StreamLearning {
 		return shoePairs
 				.stream()
 				.map(item -> new ShoePair(item.getColor(), 38, false))
+				.collect(Collectors.toList());
+	}
+
+	public List<ShoePair> getWhiteShoes() {
+		return Stream.of(
+				new ShoePair("white", 39, false),
+				new ShoePair("black", 39, false),
+				new ShoePair("white", 38, false),
+				new ShoePair("red", 38, false))
+				.filter(item -> item.getColor() == "white")
 				.collect(Collectors.toList());
 	}
 }
