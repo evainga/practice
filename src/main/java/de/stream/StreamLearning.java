@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StreamLearning {
+	List<ShoePair> shoePairs = Arrays.asList(
+			new ShoePair("black", 38, true),
+			new ShoePair("red", 39, true),
+			new ShoePair("black", 38, false),
+			new ShoePair("red", 38, true),
+			new ShoePair("white", 39, false));
 
 	public List<String> playAround() {
 		return Arrays.asList("b1", "a2", "b1", "c2", "c1").stream()
@@ -27,15 +33,16 @@ public class StreamLearning {
 	}
 
 	public List<ShoePair> filterHighheels38() {
-		List<ShoePair> shoePairs = Arrays.asList(
-				new ShoePair("black", 38, true),
-				new ShoePair("red", 39, true),
-				new ShoePair("black", 38, false),
-				new ShoePair("red", 38, true),
-				new ShoePair("white", 39, false));
 		return shoePairs
 				.stream()
 				.filter(item -> item.getSize() == 38 && item.isHighHeel() == true)
+				.collect(Collectors.toList());
+	}
+
+	public List<ShoePair> makeNewShoesInMySize() {
+		return shoePairs
+				.stream()
+				.map(item -> new ShoePair(item.getColor(), 38, false))
 				.collect(Collectors.toList());
 	}
 }
