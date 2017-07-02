@@ -25,4 +25,17 @@ public class StreamLearning {
 				.map(character -> character.toString() + "A")
 				.collect(Collectors.toList());
 	}
+
+	public List<ShoePair> filterHighheels38() {
+		List<ShoePair> shoePairs = Arrays.asList(
+				new ShoePair("black", 38, true),
+				new ShoePair("red", 39, true),
+				new ShoePair("black", 38, false),
+				new ShoePair("red", 38, true),
+				new ShoePair("white", 39, false));
+		return shoePairs
+				.stream()
+				.filter(item -> item.getSize() == 38 && item.isHighHeel() == true)
+				.collect(Collectors.toList());
+	}
 }
